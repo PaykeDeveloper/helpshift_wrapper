@@ -1,33 +1,40 @@
 import 'helpshift_wrapper_platform_interface.dart';
 
 class HelpshiftWrapper {
-  static Future setUpHelpShiftSDK(
-          {required helpShiftApiKey,
-          required helpShiftAppId,
-          required helpShiftDomain}) async =>
+  static Future setUpHelpShiftSDK({
+    required String helpShiftApiKey,
+    required String helpShiftAppId,
+    required String helpShiftDomain,
+  }) async =>
       HelpshiftWrapperPlatform.instance.setUpHelpShiftSDK(
         helpShiftApiKey: helpShiftApiKey,
         helpShiftAppId: helpShiftAppId,
         helpShiftDomain: helpShiftDomain,
       );
 
-  static Future showAllConversation({configMap}) async =>
+  static Future showAllConversation({Map<String, dynamic>? configMap}) async =>
       HelpshiftWrapperPlatform.instance.showAllConversation(
         configMap: configMap,
       );
 
-  static Future openFAQsScreen({configMap}) async =>
+  static Future openFAQsScreen({Map<String, dynamic>? configMap}) async =>
       HelpshiftWrapperPlatform.instance.openFAQsScreen(
         configMap: configMap,
       );
 
-  static Future openSingleFAQScreen({sectionId, configMap}) async =>
+  static Future openSingleFAQScreen({
+    required String sectionId,
+    Map<String, dynamic>? configMap,
+  }) async =>
       HelpshiftWrapperPlatform.instance.openSingleFAQScreen(
         sectionId: sectionId,
         configMap: configMap,
       );
 
-  static Future openSinglePublishedFAQDetail({publishId, configMap}) async =>
+  static Future openSinglePublishedFAQDetail({
+    required String publishId,
+    Map<String, dynamic>? configMap,
+  }) async =>
       HelpshiftWrapperPlatform.instance.openSinglePublishedFAQDetail(
         publishId: publishId,
         configMap: configMap,
