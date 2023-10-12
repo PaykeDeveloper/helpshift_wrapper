@@ -1,8 +1,52 @@
-
 import 'helpshift_wrapper_platform_interface.dart';
 
 class HelpshiftWrapper {
-  Future<String?> getPlatformVersion() {
-    return HelpshiftWrapperPlatform.instance.getPlatformVersion();
-  }
+  static Future setUpHelpShiftSDK(
+          {required helpShiftApiKey,
+          required helpShiftAppId,
+          required helpShiftDomain}) async =>
+      HelpshiftWrapperPlatform.instance.setUpHelpShiftSDK(
+        helpShiftApiKey: helpShiftApiKey,
+        helpShiftAppId: helpShiftAppId,
+        helpShiftDomain: helpShiftDomain,
+      );
+
+  static Future showAllConversation({configMap}) async =>
+      HelpshiftWrapperPlatform.instance.showAllConversation(
+        configMap: configMap,
+      );
+
+  static Future openFAQsScreen({configMap}) async =>
+      HelpshiftWrapperPlatform.instance.openFAQsScreen(
+        configMap: configMap,
+      );
+
+  static Future openSingleFAQScreen({sectionId, configMap}) async =>
+      HelpshiftWrapperPlatform.instance.openSingleFAQScreen(
+        sectionId: sectionId,
+        configMap: configMap,
+      );
+
+  static Future openSinglePublishedFAQDetail({publishId, configMap}) async =>
+      HelpshiftWrapperPlatform.instance.openSinglePublishedFAQDetail(
+        publishId: publishId,
+        configMap: configMap,
+      );
+
+  static Future<bool> loginUser({
+    String userName = '',
+    String userId = '',
+    String email = '',
+  }) async =>
+      HelpshiftWrapperPlatform.instance.loginUser(
+        userName: userName,
+        userId: userId,
+        email: email,
+      );
+
+  static Future<bool> logoutUser() async =>
+      HelpshiftWrapperPlatform.instance.logoutUser();
+
+  static Future<bool> setLanguage({required String language}) async =>
+      HelpshiftWrapperPlatform.instance.setLanguage(language: language);
 }

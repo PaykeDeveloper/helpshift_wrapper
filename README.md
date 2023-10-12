@@ -1,15 +1,32 @@
-# helpshift_wrapper
+# HelpShift Community Wrapper
 
-A new Flutter plugin project.
+## A plugin to use helpshift sdk into your flutter app within few steps:
 
-## Getting Started
+##### just replace the below parameters in example/lib/src/constants.dart with your domain, and api_key  and   app_id from your helpshift dashboard.
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+```sh
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+import 'dart:io';
+class Constants {
+  static const helpShiftDomain = 'your_helpshift_domain';
+  static helpShiftApiKey() {
+    if (Platform.isAndroid) {
+      return 'your_api_key_for_android';
+    } else if (Platform.isIOS) {
+      return "your_api_key_for_iOS";
+    } else {
+      return "";
+    }
+  }
 
+  static helpShiftAppId() {
+    if (Platform.isAndroid) {
+      return 'your_app_id_for_android';
+    } else if (Platform.isIOS) {
+      return "your_app_id_for_iOS";
+    } else {
+      return "";
+    }
+  }
+}
+```

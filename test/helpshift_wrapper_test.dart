@@ -1,29 +1,63 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper.dart';
-import 'package:helpshift_wrapper/helpshift_wrapper_platform_interface.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper_method_channel.dart';
+import 'package:helpshift_wrapper/helpshift_wrapper_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockHelpshiftWrapperPlatform
     with MockPlatformInterfaceMixin
     implements HelpshiftWrapperPlatform {
+  @override
+  Future<bool> loginUser(
+          {required String userName,
+          required String userId,
+          required String email}) =>
+      Future.value(true);
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<bool> logoutUser() => Future.value(true);
+
+  @override
+  Future<void> openFAQsScreen({Map<String, dynamic>? configMap}) =>
+      Future.value(null);
+
+  @override
+  Future<void> openSingleFAQScreen(
+          {required String sectionId, Map<String, dynamic>? configMap}) =>
+      Future.value(null);
+
+  @override
+  Future<void> openSinglePublishedFAQDetail(
+          {required String publishId, Map<String, dynamic>? configMap}) =>
+      Future.value(null);
+
+  @override
+  Future<bool> setLanguage({required String language}) => Future.value(true);
+
+  @override
+  Future<String> setUpHelpShiftSDK(
+          {required String helpShiftApiKey,
+          required String helpShiftAppId,
+          required String helpShiftDomain}) =>
+      Future.value('test');
+
+  @override
+  Future<void> showAllConversation({Map<String, dynamic>? configMap}) =>
+      Future.value(null);
 }
 
 void main() {
-  final HelpshiftWrapperPlatform initialPlatform = HelpshiftWrapperPlatform.instance;
+  final HelpshiftWrapperPlatform initialPlatform =
+      HelpshiftWrapperPlatform.instance;
 
   test('$MethodChannelHelpshiftWrapper is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelHelpshiftWrapper>());
   });
 
   test('getPlatformVersion', () async {
-    HelpshiftWrapper helpshiftWrapperPlugin = HelpshiftWrapper();
     MockHelpshiftWrapperPlatform fakePlatform = MockHelpshiftWrapperPlatform();
     HelpshiftWrapperPlatform.instance = fakePlatform;
 
-    expect(await helpshiftWrapperPlugin.getPlatformVersion(), '42');
+    expect(await HelpshiftWrapper.setLanguage(language: 'ja'), true);
   });
 }

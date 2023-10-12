@@ -23,7 +23,33 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
+  Future<String> setUpHelpShiftSDK({
+    required String helpShiftApiKey,
+    required String helpShiftAppId,
+    required String helpShiftDomain,
+  });
+
+  Future<void> showAllConversation({Map<String, dynamic>? configMap});
+
+  Future<void> openFAQsScreen({Map<String, dynamic>? configMap});
+
+  Future<void> openSingleFAQScreen({
+    required String sectionId,
+    Map<String, dynamic>? configMap,
+  });
+
+  Future<void> openSinglePublishedFAQDetail({
+    required String publishId,
+    Map<String, dynamic>? configMap,
+  });
+
+  Future<bool> loginUser({
+    required String userName,
+    required String userId,
+    required String email,
+  });
+
+  Future<bool> logoutUser();
+
+  Future<bool> setLanguage({required String language});
 }

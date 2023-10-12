@@ -2,8 +2,6 @@
 // of your plugin as a separate package, instead of inlining it in the same
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html show window;
-
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'helpshift_wrapper_platform_interface.dart';
@@ -17,10 +15,59 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
     HelpshiftWrapperPlatform.instance = HelpshiftWrapperWeb();
   }
 
-  /// Returns a [String] containing the version of the platform.
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = html.window.navigator.userAgent;
-    return version;
+  Future<bool> loginUser(
+      {required String userName,
+      required String userId,
+      required String email}) {
+    // TODO: implement loginUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> logoutUser() {
+    // TODO: implement logoutUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> openFAQsScreen({Map<String, dynamic>? configMap}) {
+    // TODO: implement openFAQsScreen
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> openSingleFAQScreen(
+      {required String sectionId, Map<String, dynamic>? configMap}) {
+    // TODO: implement openSingleFAQScreen
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> openSinglePublishedFAQDetail(
+      {required String publishId, Map<String, dynamic>? configMap}) {
+    // TODO: implement openSinglePublishedFAQDetail
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> setLanguage({required String language}) {
+    // TODO: implement setLanguage
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> setUpHelpShiftSDK(
+      {required String helpShiftApiKey,
+      required String helpShiftAppId,
+      required String helpShiftDomain}) {
+    // TODO: implement setUpHelpShiftSDK
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> showAllConversation({Map<String, dynamic>? configMap}) {
+    // TODO: implement showAllConversation
+    throw UnimplementedError();
   }
 }

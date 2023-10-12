@@ -9,19 +9,21 @@ void main() {
   const MethodChannel channel = MethodChannel('helpshift_wrapper');
 
   setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
-        return '42';
+        return true;
       },
     );
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
+    expect(await platform.setLanguage(language: 'ja'), true);
   });
 }

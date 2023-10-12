@@ -1,7 +1,8 @@
 name: helpshift_wrapper
-description: A new Flutter plugin project.
-version: 0.0.1
-homepage:
+description: Flutter plugin to integrate Helpshift Support SDK into your flutter app.
+version: 0.0.8
+homepage: https://github.com/helpshift-solutions/community-flutter-wrapper
+repository: https://github.com/helpshift-solutions/community-flutter-wrapper
 
 environment:
   sdk: '>=3.1.3 <4.0.0'
