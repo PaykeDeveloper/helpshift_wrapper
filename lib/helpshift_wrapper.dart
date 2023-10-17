@@ -41,9 +41,9 @@ class HelpshiftWrapper {
       );
 
   static Future<bool> loginUser({
-    String userName = '',
-    String userId = '',
-    String email = '',
+    String? userName,
+    String? userId,
+    String? email,
   }) async =>
       HelpshiftWrapperPlatform.instance.loginUser(
         userName: userName,

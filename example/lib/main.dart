@@ -266,7 +266,7 @@ class _MyAppState extends State<MyApp> {
 
   /// setup your config map according to your need
   getConfigmap() {
-    var config = {};
+    Map<String, dynamic> config = {};
     // set tags for tracking
     config["tags"] = ["foo", "bar"];
 
@@ -306,7 +306,7 @@ class _MyAppState extends State<MyApp> {
     cifMap["employee_name"] = employeeName;
     cifMap["is_pro"] = isPro;
 
-    var config = {};
+    Map<String, dynamic> config = {};
     config["customIssueFields"] = cifMap;
 
     return config;
@@ -314,7 +314,7 @@ class _MyAppState extends State<MyApp> {
 
   /// custom metadata
   setMetadata() {
-    var config = {};
+    Map<String, dynamic> config = {};
     var metaMap = {"usertype": "paid"};
     config["customMetadata"] = metaMap;
     return config;

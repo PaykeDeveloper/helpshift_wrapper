@@ -44,9 +44,9 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
   });
 
   Future<bool> loginUser({
-    required String userName,
-    required String userId,
-    required String email,
+    String? userName,
+    String? userId,
+    String? email,
   });
 
   Future<bool> logoutUser();

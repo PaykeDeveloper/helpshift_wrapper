@@ -16,10 +16,7 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
   }
 
   @override
-  Future<bool> loginUser(
-      {required String userName,
-      required String userId,
-      required String email}) {
+  Future<bool> loginUser({String? userName, String? userId, String? email}) {
     // TODO: implement loginUser
     throw UnimplementedError();
   }
