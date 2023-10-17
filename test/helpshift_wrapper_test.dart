@@ -8,10 +8,7 @@ class MockHelpshiftWrapperPlatform
     with MockPlatformInterfaceMixin
     implements HelpshiftWrapperPlatform {
   @override
-  Future<bool> loginUser(
-          {required String userName,
-          required String userId,
-          required String email}) =>
+  Future<bool> loginUser({String? userName, String? userId, String? email}) =>
       Future.value(true);
 
   @override

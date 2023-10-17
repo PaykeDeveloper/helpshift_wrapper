@@ -77,13 +77,12 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
 
   /// method to login in helpshift sdk with an arguments [userName],[userId] and [email]
   @override
-  Future<bool> loginUser({
-    required userName,
-    required userId,
-    required email,
-  }) async {
-    return await methodChannel.invokeMethod(Methods.methodLogin,
-        {'userId': userId, 'userName': userName, 'userEmail': email});
+  Future<bool> loginUser({userName, userId, email}) async {
+    return await methodChannel.invokeMethod(Methods.methodLogin, {
+      if (userId != null) 'userId': userId,
+      if (userName != null) 'userName': userName,
+      if (email != null) 'userEmail': email,
+    });
   }
 
   /// method to logout user from helpshift sdk
