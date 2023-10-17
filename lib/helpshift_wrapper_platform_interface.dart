@@ -52,4 +52,12 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
   Future<bool> logoutUser();
 
   Future<bool> setLanguage({required String language});
+
+  Future<bool> handleProactiveLink({required String proactiveLink});
+
+  Future<bool> handlePush({required Map<String, String> data});
+
+  Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser});
+
+  Future<bool> requestUnreadMessageCount({required bool shouldFetchFromServer});
 }

@@ -72,6 +72,38 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
         result(true)
       }
 
+    case Constant.methodHandleProactiveLink:
+      do {
+        let map = call.arguments as! [String: Any]
+        let proactiveLink = (map["proactiveLink"])! as! String
+        self.handleProactiveLink(proactiveLink)
+        result(true)
+      }
+
+    case Constant.methodHandlePush:
+      do {
+        let map = call.arguments as! [String: Any]
+        let data = (map["data"])! as! [String: String]
+        self.handlePush(data)
+        result(true)
+      }
+
+    case Constant.methodClearAnonymousUserOnLogin:
+      do {
+        let map = call.arguments as! [String: Any]
+        let clearAnonymousUser = (map["clearAnonymousUser"])! as! Bool
+        self.clearAnonymousUserOnLogin(clearAnonymousUser)
+        result(true)
+      }
+
+    case Constant.methodRequestUnreadMessageCount:
+      do {
+        let map = call.arguments as! [String: Any]
+        let shouldFetchFromServer = (map["shouldFetchFromServer"])! as! Bool
+        self.requestUnreadMessageCount(shouldFetchFromServer)
+        result(true)
+      }
+
     default:
       do {
 
@@ -129,5 +161,23 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
 
   func setLanguage(_ language: String) {
     Helpshift.setLanguage(language)
+  }
+    
+  func handleProactiveLink(_ proactiveLink: String) {
+    Helpshift.handleProactiveLink(proactiveLink)
+  }
+
+  func handlePush(_ data: [String: String]) {
+      let viewController: UIViewController =
+        (UIApplication.shared.delegate?.window??.rootViewController)!
+    Helpshift.handleNotification(withUserInfoDictionary: data, isAppLaunch: true, with: viewController)
+  }
+
+  func clearAnonymousUserOnLogin(_ clearAnonymousUser: Bool) {
+    Helpshift.clearAnonymousUser(onLogin: clearAnonymousUser)
+  }
+
+  func requestUnreadMessageCount(_ shouldFetchFromServer: Bool) {
+    Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
   }
 }

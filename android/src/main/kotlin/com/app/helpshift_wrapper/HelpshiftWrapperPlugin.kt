@@ -100,14 +100,38 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             }
 
             Constants.methodSetLanguage -> {
-                try {
-                    val map = call.arguments as Map<String, String>
-                    val language = map["language"] as String
-                    setLanguage(language)
-                    result.success(true)
-                } catch (e: Exception) {
-                    result.success(false)
-                }
+                val map = call.arguments as Map<String, Any>
+                val language = map["language"] as String
+                setLanguage(language)
+                result.success(true)
+            }
+
+            Constants.methodHandleProactiveLink -> {
+                val map = call.arguments as Map<String, Any>
+                val proactiveLink = map["proactiveLink"] as String
+                handleProactiveLink(proactiveLink)
+                result.success(true)
+            }
+
+            Constants.methodHandlePush -> {
+                val map = call.arguments as Map<String, Any>
+                val data = map["data"] as Map<String, String>
+                handlePush(data)
+                result.success(true)
+            }
+
+            Constants.methodClearAnonymousUserOnLogin -> {
+                val map = call.arguments as Map<String, Any>
+                val clearAnonymousUser = map["clearAnonymousUser"] as Boolean
+                clearAnonymousUserOnLogin(clearAnonymousUser)
+                result.success(true)
+            }
+
+            Constants.methodRequestUnreadMessageCount -> {
+                val map = call.arguments as Map<String, Any>
+                val shouldFetchFromServer = map["shouldFetchFromServer"] as Boolean
+                requestUnreadMessageCount(shouldFetchFromServer)
+                result.success(true)
             }
 
             else -> {
@@ -168,5 +192,21 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private fun setLanguage(language: String) {
         Helpshift.setLanguage(language)
+    }
+
+    private fun handleProactiveLink(proactiveLink: String) {
+        Helpshift.handleProactiveLink(proactiveLink)
+    }
+
+    private fun handlePush(data: Map<String, String>) {
+        Helpshift.handlePush(data)
+    }
+
+    private fun clearAnonymousUserOnLogin(clearAnonymousUser: Boolean) {
+        Helpshift.clearAnonymousUserOnLogin(clearAnonymousUser)
+    }
+
+    private fun requestUnreadMessageCount(shouldFetchFromServer: Boolean) {
+        Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
     }
 }

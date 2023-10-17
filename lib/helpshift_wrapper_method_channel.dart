@@ -99,4 +99,38 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
       {'language': language},
     );
   }
+
+  @override
+  Future<bool> clearAnonymousUserOnLogin(
+      {required bool clearAnonymousUser}) async {
+    return await methodChannel.invokeMethod(
+      Methods.methodClearAnonymousUserOnLogin,
+      {'clearAnonymousUser': clearAnonymousUser},
+    );
+  }
+
+  @override
+  Future<bool> handleProactiveLink({required String proactiveLink}) async {
+    return await methodChannel.invokeMethod(
+      Methods.methodHandleProactiveLink,
+      {'proactiveLink': proactiveLink},
+    );
+  }
+
+  @override
+  Future<bool> handlePush({required Map<String, String> data}) async {
+    return await methodChannel.invokeMethod(
+      Methods.methodHandlePush,
+      {'data': data},
+    );
+  }
+
+  @override
+  Future<bool> requestUnreadMessageCount(
+      {required bool shouldFetchFromServer}) async {
+    return await methodChannel.invokeMethod(
+      Methods.methodRequestUnreadMessageCount,
+      {'shouldFetchFromServer': shouldFetchFromServer},
+    );
+  }
 }

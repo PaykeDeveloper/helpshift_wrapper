@@ -70,4 +70,29 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
     // TODO: implement showAllConversation
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser}) {
+    // TODO: implement clearAnonymousUserOnLogin
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> handleProactiveLink({required String proactiveLink}) {
+    // TODO: implement handleProactiveLink
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> handlePush({required Map<String, String> data}) {
+    // TODO: implement handlePush
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> requestUnreadMessageCount(
+      {required bool shouldFetchFromServer}) {
+    // TODO: implement requestUnreadMessageCount
+    throw UnimplementedError();
+  }
 }
