@@ -50,7 +50,7 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         when (call.method) {
             Constants.methodConfigureSdk -> {
                 // configure and setup your sdk here
-                val map = call.arguments as Map<String, String>
+                val map = call.arguments as Map<String, Any>
                 configureHelpShiftSDK(map)
                 result.success("SDK CONFIGURED")
             }
@@ -144,13 +144,13 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel.setMethodCallHandler(null)
     }
 
-    private fun configureHelpShiftSDK(args: Map<String, String>) {
+    private fun configureHelpShiftSDK(args: Map<String, Any>) {
 
-        val configurations: HashMap<String, Any> = HashMap()
-        configurations["enableInAppNotification"] = true
-        configurations["enableLogging"] = true
-        configurations["notificationChannelId"] = "HelpShift Notifications"
-        configurations["notificationChannelId"] = "HelpShift Notifications"
+//        val configurations: HashMap<String, Any> = HashMap()
+//        configurations["enableInAppNotification"] = true
+//        configurations["enableLogging"] = true
+//        configurations["notificationChannelId"] = "HelpShift Notifications"
+        val configurations = args["configMap"] as Map<String, Any>
 
         try {
             Helpshift.install(

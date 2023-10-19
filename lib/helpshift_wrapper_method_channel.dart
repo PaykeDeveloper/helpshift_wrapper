@@ -14,16 +14,19 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   /// with arguments [helpShiftApiKey],[helpShiftDomain] and [helpShiftAppId] you will
   /// get in your HelpShift Account Dashboard
   @override
-  Future<String> setUpHelpShiftSDK(
-      {required helpShiftApiKey,
-      required helpShiftAppId,
-      required helpShiftDomain}) async {
+  Future<String> setUpHelpShiftSDK({
+    required helpShiftApiKey,
+    required helpShiftAppId,
+    required helpShiftDomain,
+    required configMap,
+  }) async {
     var status = await methodChannel.invokeMethod(
       Methods.methodConfigureSdk,
       {
         'helpShiftApiKey': helpShiftApiKey,
         'helpShiftAppId': helpShiftAppId,
-        'helpShiftDomain': helpShiftDomain
+        'helpShiftDomain': helpShiftDomain,
+        'configMap': configMap,
       },
     );
     if (kDebugMode) {
@@ -35,7 +38,7 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   /// method which will invoke the contact_us function implemented in Native Platform
   /// with an argument [configMap], it will open all the conversation listing from HelpShift SDK Support and user
   @override
-  Future<void> showAllConversation({configMap}) async {
+  Future<void> showAllConversation({required configMap}) async {
     await methodChannel.invokeMethod(
       Methods.allConversation,
       {'configMap': configMap},
@@ -45,7 +48,7 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   /// method which will invoke the faq_s function implemented in Native Platform
   /// with an argument [configMap] , it will open the native HelpShift SDK's all FAQ screen in a web_view
   @override
-  Future<void> openFAQsScreen({configMap}) async {
+  Future<void> openFAQsScreen({required configMap}) async {
     await methodChannel.invokeMethod(
       Methods.allFAQs,
       {'configMap': configMap},
@@ -56,7 +59,10 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   /// with an argument [sectionId] and [configMap], it will open any particular FAQ from HelpShift SDK in a
   /// web_view format
   @override
-  Future<void> openSingleFAQScreen({required sectionId, configMap}) async {
+  Future<void> openSingleFAQScreen({
+    required sectionId,
+    required configMap,
+  }) async {
     await methodChannel.invokeMethod(
       Methods.methodSingleFAQsSection,
       {'sectionId': sectionId, 'configMap': configMap},
@@ -67,8 +73,10 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   /// with an argument [sectionId] and [configMap], it will open any particular FAQ from HelpShift SDK in a
   /// web_view format
   @override
-  Future<void> openSinglePublishedFAQDetail(
-      {required publishId, configMap}) async {
+  Future<void> openSinglePublishedFAQDetail({
+    required publishId,
+    required configMap,
+  }) async {
     await methodChannel.invokeMethod(
       Methods.methodSingleFAQDetail,
       {'publishId': publishId, 'configMap': configMap},

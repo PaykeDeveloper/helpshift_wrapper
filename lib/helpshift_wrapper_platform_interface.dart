@@ -27,20 +27,21 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
     required String helpShiftApiKey,
     required String helpShiftAppId,
     required String helpShiftDomain,
+    required Map<String, dynamic> configMap,
   });
 
-  Future<void> showAllConversation({Map<String, dynamic>? configMap});
+  Future<void> showAllConversation({required Map<String, dynamic> configMap});
 
-  Future<void> openFAQsScreen({Map<String, dynamic>? configMap});
+  Future<void> openFAQsScreen({required Map<String, dynamic> configMap});
 
   Future<void> openSingleFAQScreen({
     required String sectionId,
-    Map<String, dynamic>? configMap,
+    required Map<String, dynamic> configMap,
   });
 
   Future<void> openSinglePublishedFAQDetail({
     required String publishId,
-    Map<String, dynamic>? configMap,
+    required Map<String, dynamic> configMap,
   });
 
   Future<bool> loginUser({
