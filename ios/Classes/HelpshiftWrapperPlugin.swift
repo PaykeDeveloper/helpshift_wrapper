@@ -14,7 +14,7 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case Constant.methodConfigureSdk:
       do {
-        self.configureHelpShiftSdk(call.arguments as! [String: String])
+        self.configureHelpShiftSdk(call.arguments as! [String: Any])
         result("iOS Setup Completed")
       }
     case Constant.allConversation:
@@ -82,12 +82,12 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
     result("iOS " + UIDevice.current.systemVersion)
   }
 
-  func configureHelpShiftSdk(_ map: [String: String]) {
-    let apiKey = map["helpShiftApiKey"]
-    let domainName = map["helpShiftDomain"] ?? ""
-    let appId = map["helpShiftAppId"] ?? ""
+  func configureHelpShiftSdk(_ map: [String: Any]) {
+//    let apiKey = (map["helpShiftApiKey"])! as! String
+    let domainName = (map["helpShiftDomain"])! as! String
+    let appId = (map["helpShiftAppId"])! as! String
 
-    let config = [String: String]()
+    let config = (map["configMap"])! as! [String: Any]
 
     Helpshift.install(withPlatformId: appId, domain: domainName, config: config)
 

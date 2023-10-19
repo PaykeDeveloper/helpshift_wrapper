@@ -54,10 +54,12 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
   }
 
   @override
-  Future<String> setUpHelpShiftSDK(
-      {required String helpShiftApiKey,
-      required String helpShiftAppId,
-      required String helpShiftDomain}) {
+  Future<String> setUpHelpShiftSDK({
+    required String helpShiftApiKey,
+    required String helpShiftAppId,
+    required String helpShiftDomain,
+    Map<String, dynamic>? configMap,
+  }) {
     // TODO: implement setUpHelpShiftSDK
     throw UnimplementedError();
   }
