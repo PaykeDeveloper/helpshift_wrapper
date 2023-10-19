@@ -9,6 +9,8 @@ PODS:
   - HelpshiftX (10.2.3)
   - integration_test (0.0.1):
     - Flutter
+  - permission_handler_apple (9.1.1):
+    - Flutter
   - Toast (4.0.0)
 
 DEPENDENCIES:
@@ -16,6 +18,7 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - helpshift_wrapper (from `.symlinks/plugins/helpshift_wrapper/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
@@ -31,6 +34,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/helpshift_wrapper/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
@@ -38,8 +43,9 @@ SPEC CHECKSUMS:
   helpshift_wrapper: 938e337a82390971da6fa5301996bd98114d57c6
   HelpshiftX: b7a131fdf10f7e5d3f974463331cd8cc165ad21e
   integration_test: 13825b8a9334a850581300559b8839134b124670
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
+PODFILE CHECKSUM: 8a6fdc3be570074ded6b5ba0ba16f1a6735ce4eb
 
 COCOAPODS: 1.13.0

@@ -12,50 +12,61 @@ import HelpshiftX
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
+  // helpshift_wrapper
   override func application(
     _ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
   ) {
     super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     Helpshift.registerDeviceToken(deviceToken)
   }
+  override func userNotificationCenter(
+    _ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    if notification.request.content.userInfo["origin"] as? String == "helpshift" {
+      Helpshift.handleNotification(
+        withUserInfoDictionary: notification.request.content.userInfo, isAppLaunch: false,
+        with: UIApplication.shared.rootViewController)
+      completionHandler([])
+    } else {
+      super.userNotificationCenter(
+        center, willPresent: notification, withCompletionHandler: completionHandler)
+    }
+  }
+  override func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+    if response.notification.request.content.userInfo["origin"] as? String == "helpshift" {
+      Helpshift.handleNotification(
+        withUserInfoDictionary: response.notification.request.content.userInfo, isAppLaunch: true,
+        with: UIApplication.shared.rootViewController)
+      completionHandler()
+    } else {
+      super.userNotificationCenter(
+        center, didReceive: response, withCompletionHandler: completionHandler)
+    }
+  }
+}
 
-//   override func userNotificationCenter(
-//     _ center: UNUserNotificationCenter,
-//     willPresent notification: UNNotification
-//   ) async -> UNNotificationPresentationOptions {
-//     super.userNotificationCenter(center, willPresent: notification)
-//
-//     let options = super.userNotificationCenter(center, didReceive: response)
-//
-//     let userInfo = notification.request.content.userInfo
-//     if let origin = userInfo["origin"] as? String, origin == "helpshift" {
-//       print("userNotificationCenter:willPresentNotification for helpshift origin.")
-//       Helpshift.handleNotification(
-//         withUserInfoDictionary: userInfo,
-//         isAppLaunch: false,
-//         with: UIApplication.shared.rootViewController)
-//       return []
-//     } else if let proactiveLink = userInfo["helpshift_proactive_link"] as? String {
-//       Helpshift.handleProactiveLink(proactiveLink)
-//     }
-//     return [.banner, .sound]
-//   }
-//
-//   override func userNotificationCenter(
-//     _ center: UNUserNotificationCenter,
-//     didReceive response: UNNotificationResponse
-//   ) async {
-//     super.userNotificationCenter(center, didReceive: response)
-//
-//     let userInfo = response.notification.request.content.userInfo
-//     if let origin = userInfo["origin"] as? String, origin == "helpshift" {
-//       print("userNotificationCenter:didReceiveResponse for helpshift origin.")
-//       Helpshift.handleNotification(
-//         withUserInfoDictionary: userInfo,
-//         isAppLaunch: true,
-//         with: UIApplication.shared.rootViewController)
-//     } else if let proactiveLink = userInfo["helpshift_proactive_link"] as? String {
-//       Helpshift.handleProactiveLink(proactiveLink)
-//     }
-//   }
+extension UIApplication {
+  var currentKeyWindow: UIWindow? {
+    if #available(iOS 13.0, *) {
+      return UIApplication.shared.connectedScenes
+        .compactMap { $0 as? UIWindowScene }
+        .first?.windows
+        .filter { $0.isKeyWindow }
+        .first
+    } else {
+      return nil
+    }
+  }
+
+  var rootViewController: UIViewController {
+    guard let vc = currentKeyWindow?.rootViewController else {
+      fatalError("Root view controller is nil. This should never happen.")
+    }
+    return vc
+  }
 }

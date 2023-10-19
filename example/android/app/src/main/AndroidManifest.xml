@@ -39,4 +39,7 @@
             </intent-filter>
         </service>
     </application>
+
+    <!-- helpshift_wrapper -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 </manifest>

@@ -57,9 +57,6 @@ class MockHelpshiftWrapperPlatform
       Future.value(true);
 
   @override
-  Future<bool> registerPushToken({required String token}) => Future.value(true);
-
-  @override
   Future<bool> requestUnreadMessageCount(
       {required bool shouldFetchFromServer}) {
     // TODO: implement requestUnreadMessageCount
