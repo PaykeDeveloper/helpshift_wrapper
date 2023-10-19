@@ -266,7 +266,7 @@ class _MyAppState extends State<MyApp> {
   getConfigmap() {
     Map<String, dynamic> config = {
       "initiateChatOnLoad": true,
-      "initialUserMessage": "foobar",
+      // "initialUserMessage": "foobar",
     };
     // set tags for tracking
     config["tags"] = ["foo", "bar"];
