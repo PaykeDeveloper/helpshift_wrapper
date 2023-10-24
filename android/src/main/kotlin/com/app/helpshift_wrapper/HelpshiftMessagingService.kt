@@ -1,5 +1,6 @@
 package com.app.helpshift_wrapper
 
+import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.helpshift.Helpshift
@@ -8,11 +9,15 @@ import com.helpshift.Helpshift
 class HelpshiftMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
+        // FIXME: 検証用ログ
+        Log.i("HelpshiftMessaging", "onNewToken $token")
         super.onNewToken(token)
         Helpshift.registerPushToken(token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        // FIXME: 検証用ログ
+        Log.i("HelpshiftMessaging", "onNewToken ${remoteMessage.data}")
         super.onMessageReceived(remoteMessage)
 
         val data = remoteMessage.data
