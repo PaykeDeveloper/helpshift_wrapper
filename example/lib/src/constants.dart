@@ -1,23 +1,17 @@
 import 'dart:io';
 
 class Constants {
-  static const helpShiftDomain = 'dev-1.helpshift.com';
+  static const helpShiftDomain = String.fromEnvironment("HELP_SHIFT_DOMAIN");
 
   static helpShiftApiKey() {
-    if (Platform.isAndroid) {
-      return 'b3c36d1815354cc6055eb4c8e5098439';
-    } else if (Platform.isIOS) {
-      return "b3c36d1815354cc6055eb4c8e5098439";
-    } else {
-      return "";
-    }
+    return const String.fromEnvironment("HELP_SHIFT_API_KEY");
   }
 
   static helpShiftAppId() {
     if (Platform.isAndroid) {
-      return 'dev-1_platform_20221007091607698-2f0a9b0bcaee4ea';
+      return const String.fromEnvironment("HELP_SHIFT_ANDROID_APP_ID");
     } else if (Platform.isIOS) {
-      return "dev-1_platform_20221007091607612-d89f65912f77ac9";
+      return const String.fromEnvironment("HELP_SHIFT_IOS_APP_ID");
     } else {
       return "";
     }
