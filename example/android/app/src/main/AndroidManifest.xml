@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="helpshift_wrapper_example"
-        android:name="${applicationName}"
+        android:name="com.app.helpshift_wrapper_example.MainApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -22,6 +22,17 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def getProperty(project, localProperties, String key) {
+    if (project.hasProperty(key)) {
+        return project.property(key)
+    }
+    def property = localProperties.getProperty(key)
+    if (property != null) {
+        return property
+    }
+    return System.getenv(key)
+}
+
 android {
     namespace "com.app.helpshift_wrapper_example"
     compileSdkVersion flutter.compileSdkVersion
@@ -49,6 +60,10 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // helpshift_wrapper
+        resValue "string", "help_shift_domain", getProperty(project, localProperties, "HELP_SHIFT_DOMAIN")
+        resValue "string", "help_shift_android_app_id", getProperty(project, localProperties, "HELP_SHIFT_ANDROID_APP_ID")
     }
 
     buildTypes {

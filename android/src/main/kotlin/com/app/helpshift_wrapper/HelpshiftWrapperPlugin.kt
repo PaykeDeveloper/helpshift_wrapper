@@ -1,6 +1,7 @@
 package com.app.helpshift_wrapper
 
 import android.app.Activity
+import android.app.Application
 import com.helpshift.Helpshift
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -48,12 +49,12 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 //        var status = await _channel.invokeListMethod("configure_sdk",
 //        {'secret': helpShiftSecretKey, 'publishKey': helpShiftPublishableKey});
         when (call.method) {
-            Constants.methodConfigureSdk -> {
-                // configure and setup your sdk here
-                val map = call.arguments as Map<String, Any>
-                configureHelpShiftSDK(map)
-                result.success("SDK CONFIGURED")
-            }
+//            Constants.methodConfigureSdk -> {
+//                // configure and setup your sdk here
+//                val map = call.arguments as Map<String, Any>
+//                configureHelpShiftSDK(map)
+//                result.success("SDK CONFIGURED")
+//            }
 
             Constants.allConversation -> {
                 val map = call.arguments as Map<String, Any>
@@ -144,27 +145,27 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         channel.setMethodCallHandler(null)
     }
 
-    private fun configureHelpShiftSDK(args: Map<String, Any>) {
-
-//        val configurations: HashMap<String, Any> = HashMap()
-//        configurations["enableInAppNotification"] = true
-//        configurations["enableLogging"] = true
-//        configurations["notificationChannelId"] = "HelpShift Notifications"
-        val configurations = args["configMap"] as Map<String, Any>
-
-        try {
-            Helpshift.install(
-                    activity!!.application,
-                    args["helpShiftAppId"].toString(),
-                    args["helpShiftDomain"].toString(),
-                    configurations,
-            )
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-
-        }
-    }
+//    private fun configureHelpShiftSDK(args: Map<String, Any>) {
+//
+////        val configurations: HashMap<String, Any> = HashMap()
+////        configurations["enableInAppNotification"] = true
+////        configurations["enableLogging"] = true
+////        configurations["notificationChannelId"] = "HelpShift Notifications"
+//        val configurations = args["configMap"] as Map<String, Any>
+//
+//        try {
+//            Helpshift.install(
+//                    activity!!.application,
+//                    args["helpShiftAppId"].toString(),
+//                    args["helpShiftDomain"].toString(),
+//                    configurations,
+//            )
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        } finally {
+//
+//        }
+//    }
 
     private fun showAllConversation(configMap: Map<String, Any>) {
         Helpshift.showConversation(activity!!, configMap)
@@ -208,5 +209,11 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private fun requestUnreadMessageCount(shouldFetchFromServer: Boolean) {
         Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
+    }
+
+    companion object {
+        fun install(application: Application, platformId: String, domain: String, config: Map<String, Any>? = null) {
+            Helpshift.install(application, platformId, domain, config)
+        }
     }
 }

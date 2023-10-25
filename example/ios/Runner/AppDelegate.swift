@@ -8,6 +8,17 @@ import HelpshiftX
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    // helpshift_wrapper
+    Helpshift.install(
+      withPlatformId: Bundle.main.object(forInfoDictionaryKey: "HelpShiftIosAppId") as! String,
+      domain: Bundle.main.object(forInfoDictionaryKey: "HelpShiftDomain") as! String,
+      config: [
+        "enableLogging": true,
+//         "isForChina": true,
+      ])
+//     Helpshift.sharedInstance().delegate = self
+//     Helpshift.sharedInstance().proactiveAPIConfigCollectorDelegate = self
+
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

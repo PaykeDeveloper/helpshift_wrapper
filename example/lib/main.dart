@@ -8,21 +8,21 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  setupHelpShiftSdk();
+  // setupHelpShiftSdk();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
   });
 }
 
-/// configure HelpShift SDK for Native Platforms
-void setupHelpShiftSdk() async {
-  await HelpshiftWrapper.setUpHelpShiftSDK(
-    helpShiftApiKey: Constants.helpShiftApiKey(),
-    helpShiftAppId: Constants.helpShiftAppId(),
-    helpShiftDomain: Constants.helpShiftDomain,
-  );
-}
+// /// configure HelpShift SDK for Native Platforms
+// void setupHelpShiftSdk() async {
+//   await HelpshiftWrapper.setUpHelpShiftSDK(
+//     helpShiftApiKey: Constants.helpShiftApiKey(),
+//     helpShiftAppId: Constants.helpShiftAppId(),
+//     helpShiftDomain: Constants.helpShiftDomain,
+//   );
+// }
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);

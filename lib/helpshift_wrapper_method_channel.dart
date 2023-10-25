@@ -10,30 +10,30 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('helpshift_wrapper');
 
-  /// call this method to setup HelpShift SDK in Native Platform
-  /// with arguments [helpShiftApiKey],[helpShiftDomain] and [helpShiftAppId] you will
-  /// get in your HelpShift Account Dashboard
-  @override
-  Future<String> setUpHelpShiftSDK({
-    required helpShiftApiKey,
-    required helpShiftAppId,
-    required helpShiftDomain,
-    required configMap,
-  }) async {
-    var status = await methodChannel.invokeMethod(
-      Methods.methodConfigureSdk,
-      {
-        'helpShiftApiKey': helpShiftApiKey,
-        'helpShiftAppId': helpShiftAppId,
-        'helpShiftDomain': helpShiftDomain,
-        'configMap': configMap,
-      },
-    );
-    if (kDebugMode) {
-      print("configuration status: $status");
-    }
-    return status;
-  }
+  // /// call this method to setup HelpShift SDK in Native Platform
+  // /// with arguments [helpShiftApiKey],[helpShiftDomain] and [helpShiftAppId] you will
+  // /// get in your HelpShift Account Dashboard
+  // @override
+  // Future<String> setUpHelpShiftSDK({
+  //   required helpShiftApiKey,
+  //   required helpShiftAppId,
+  //   required helpShiftDomain,
+  //   required configMap,
+  // }) async {
+  //   var status = await methodChannel.invokeMethod(
+  //     Methods.methodConfigureSdk,
+  //     {
+  //       'helpShiftApiKey': helpShiftApiKey,
+  //       'helpShiftAppId': helpShiftAppId,
+  //       'helpShiftDomain': helpShiftDomain,
+  //       'configMap': configMap,
+  //     },
+  //   );
+  //   if (kDebugMode) {
+  //     print("configuration status: $status");
+  //   }
+  //   return status;
+  // }
 
   /// method which will invoke the contact_us function implemented in Native Platform
   /// with an argument [configMap], it will open all the conversation listing from HelpShift SDK Support and user

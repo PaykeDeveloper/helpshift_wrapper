@@ -53,16 +53,16 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
     throw UnimplementedError();
   }
 
-  @override
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    Map<String, dynamic>? configMap,
-  }) {
-    // TODO: implement setUpHelpShiftSDK
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   Map<String, dynamic>? configMap,
+  // }) {
+  //   // TODO: implement setUpHelpShiftSDK
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<void> showAllConversation({Map<String, dynamic>? configMap}) {

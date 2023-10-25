@@ -23,12 +23,12 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    required Map<String, dynamic> configMap,
-  });
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   required Map<String, dynamic> configMap,
+  // });
 
   Future<void> showAllConversation({required Map<String, dynamic> configMap});
 

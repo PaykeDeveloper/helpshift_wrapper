@@ -31,14 +31,14 @@ class MockHelpshiftWrapperPlatform
   @override
   Future<bool> setLanguage({required String language}) => Future.value(true);
 
-  @override
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    Map<String, dynamic>? configMap,
-  }) =>
-      Future.value('test');
+  // @override
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   Map<String, dynamic>? configMap,
+  // }) =>
+  //     Future.value('test');
 
   @override
   Future<void> showAllConversation({required Map<String, dynamic> configMap}) =>

@@ -12,11 +12,11 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case Constant.methodConfigureSdk:
-      do {
-        self.configureHelpShiftSdk(call.arguments as! [String: Any])
-        result("iOS Setup Completed")
-      }
+//     case Constant.methodConfigureSdk:
+//       do {
+//         self.configureHelpShiftSdk(call.arguments as! [String: Any])
+//         result("iOS Setup Completed")
+//       }
     case Constant.allConversation:
       do {
         let viewController1: UIViewController =
@@ -114,19 +114,19 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
     result("iOS " + UIDevice.current.systemVersion)
   }
 
-  func configureHelpShiftSdk(_ map: [String: Any]) {
-//    let apiKey = (map["helpShiftApiKey"])! as! String
-    let domainName = (map["helpShiftDomain"])! as! String
-    let appId = (map["helpShiftAppId"])! as! String
-
-    let config = (map["configMap"])! as! [String: Any]
-
-    Helpshift.install(withPlatformId: appId, domain: domainName, config: config)
-
-    //        HelpshiftCore.initialize(with: HelpshiftSupport.sharedInstance())
-    //        HelpshiftCore.install(forApiKey:apiKey, domainName: domainName, appID: appId)
-
-  }
+//   func configureHelpShiftSdk(_ map: [String: Any]) {
+// //    let apiKey = (map["helpShiftApiKey"])! as! String
+//     let domainName = (map["helpShiftDomain"])! as! String
+//     let appId = (map["helpShiftAppId"])! as! String
+//
+//     let config = (map["configMap"])! as! [String: Any]
+//
+//     Helpshift.install(withPlatformId: appId, domain: domainName, config: config)
+//
+//     //        HelpshiftCore.initialize(with: HelpshiftSupport.sharedInstance())
+//     //        HelpshiftCore.install(forApiKey:apiKey, domainName: domainName, appID: appId)
+//
+//   }
 
   func showAllConversation(_ type: UIViewController, _ configMap: [String: Any]) {
 
