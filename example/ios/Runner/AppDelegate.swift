@@ -34,30 +34,35 @@ import HelpshiftX
     _ center: UNUserNotificationCenter, willPresent notification: UNNotification,
     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
   ) {
-    if notification.request.content.userInfo["origin"] as? String == "helpshift" {
+    let userInfo = notification.request.content.userInfo
+    if let origin = userInfo["origin"] as? String, origin == "helpshift" {
       Helpshift.handleNotification(
-        withUserInfoDictionary: notification.request.content.userInfo, isAppLaunch: false,
+        withUserInfoDictionary: userInfo, isAppLaunch: false,
         with: UIApplication.shared.rootViewController)
       completionHandler([])
-    } else {
-      super.userNotificationCenter(
-        center, willPresent: notification, withCompletionHandler: completionHandler)
+      return
     }
+    if let proactiveLink = userInfo["helpshift_proactive_link"] as? String {
+      Helpshift.handleProactiveLink(proactiveLink)
+    }
+    super.userNotificationCenter(
+      center, willPresent: notification, withCompletionHandler: completionHandler)
   }
   override func userNotificationCenter(
     _ center: UNUserNotificationCenter,
     didReceive response: UNNotificationResponse,
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
-    if response.notification.request.content.userInfo["origin"] as? String == "helpshift" {
+    let userInfo = response.notification.request.content.userInfo
+    if let origin = userInfo["origin"] as? String, origin == "helpshift" {
       Helpshift.handleNotification(
-        withUserInfoDictionary: response.notification.request.content.userInfo, isAppLaunch: true,
+        withUserInfoDictionary: userInfo, isAppLaunch: true,
         with: UIApplication.shared.rootViewController)
-      completionHandler()
-    } else {
-      super.userNotificationCenter(
-        center, didReceive: response, withCompletionHandler: completionHandler)
+    } else if let proactiveLink = userInfo["helpshift_proactive_link"] as? String {
+      Helpshift.handleProactiveLink(proactiveLink)
     }
+    super.userNotificationCenter(
+      center, didReceive: response, withCompletionHandler: completionHandler)
   }
 }
 
