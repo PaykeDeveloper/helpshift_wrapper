@@ -3,18 +3,18 @@ import 'helpshift_wrapper_platform_interface.dart';
 const Map<String, dynamic> defaultMap = {};
 
 class HelpshiftWrapper {
-  static Future setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    Map<String, dynamic> configMap = defaultMap,
-  }) async =>
-      HelpshiftWrapperPlatform.instance.setUpHelpShiftSDK(
-        helpShiftApiKey: helpShiftApiKey,
-        helpShiftAppId: helpShiftAppId,
-        helpShiftDomain: helpShiftDomain,
-        configMap: configMap,
-      );
+  // static Future setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   Map<String, dynamic> configMap = defaultMap,
+  // }) async =>
+  //     HelpshiftWrapperPlatform.instance.setUpHelpShiftSDK(
+  //       helpShiftApiKey: helpShiftApiKey,
+  //       helpShiftAppId: helpShiftAppId,
+  //       helpShiftDomain: helpShiftDomain,
+  //       configMap: configMap,
+  //     );
 
   static Future showAllConversation({
     Map<String, dynamic> configMap = defaultMap,

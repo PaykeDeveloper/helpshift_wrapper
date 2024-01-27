@@ -31,18 +31,37 @@ class MockHelpshiftWrapperPlatform
   @override
   Future<bool> setLanguage({required String language}) => Future.value(true);
 
-  @override
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    Map<String, dynamic>? configMap,
-  }) =>
-      Future.value('test');
+  // @override
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   Map<String, dynamic>? configMap,
+  // }) =>
+  //     Future.value('test');
 
   @override
   Future<void> showAllConversation({required Map<String, dynamic> configMap}) =>
       Future.value(null);
+
+  @override
+  Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser}) =>
+      Future.value(true);
+
+  @override
+  Future<bool> handleProactiveLink({required String proactiveLink}) =>
+      Future.value(true);
+
+  @override
+  Future<bool> handlePush({required Map<String, String> data}) =>
+      Future.value(true);
+
+  @override
+  Future<bool> requestUnreadMessageCount(
+      {required bool shouldFetchFromServer}) {
+    // TODO: implement requestUnreadMessageCount
+    throw UnimplementedError();
+  }
 }
 
 void main() {

@@ -23,12 +23,12 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    required Map<String, dynamic> configMap,
-  });
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   required Map<String, dynamic> configMap,
+  // });
 
   Future<void> showAllConversation({required Map<String, dynamic> configMap});
 
@@ -53,4 +53,12 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
   Future<bool> logoutUser();
 
   Future<bool> setLanguage({required String language});
+
+  Future<bool> handleProactiveLink({required String proactiveLink});
+
+  Future<bool> handlePush({required Map<String, String> data});
+
+  Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser});
+
+  Future<bool> requestUnreadMessageCount({required bool shouldFetchFromServer});
 }

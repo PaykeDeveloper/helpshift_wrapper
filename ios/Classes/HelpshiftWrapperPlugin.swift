@@ -12,11 +12,11 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
-    case Constant.methodConfigureSdk:
-      do {
-        self.configureHelpShiftSdk(call.arguments as! [String: Any])
-        result("iOS Setup Completed")
-      }
+//     case Constant.methodConfigureSdk:
+//       do {
+//         self.configureHelpShiftSdk(call.arguments as! [String: Any])
+//         result("iOS Setup Completed")
+//       }
     case Constant.allConversation:
       do {
         let viewController1: UIViewController =
@@ -72,6 +72,38 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
         result(true)
       }
 
+    case Constant.methodHandleProactiveLink:
+      do {
+        let map = call.arguments as! [String: Any]
+        let proactiveLink = (map["proactiveLink"])! as! String
+        self.handleProactiveLink(proactiveLink)
+        result(true)
+      }
+
+    case Constant.methodHandlePush:
+      do {
+        let map = call.arguments as! [String: Any]
+        let data = (map["data"])! as! [String: String]
+        self.handlePush(data)
+        result(true)
+      }
+
+    case Constant.methodClearAnonymousUserOnLogin:
+      do {
+        let map = call.arguments as! [String: Any]
+        let clearAnonymousUser = (map["clearAnonymousUser"])! as! Bool
+        self.clearAnonymousUserOnLogin(clearAnonymousUser)
+        result(true)
+      }
+
+    case Constant.methodRequestUnreadMessageCount:
+      do {
+        let map = call.arguments as! [String: Any]
+        let shouldFetchFromServer = (map["shouldFetchFromServer"])! as! Bool
+        self.requestUnreadMessageCount(shouldFetchFromServer)
+        result(true)
+      }
+
     default:
       do {
 
@@ -82,19 +114,19 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
     result("iOS " + UIDevice.current.systemVersion)
   }
 
-  func configureHelpShiftSdk(_ map: [String: Any]) {
-//    let apiKey = (map["helpShiftApiKey"])! as! String
-    let domainName = (map["helpShiftDomain"])! as! String
-    let appId = (map["helpShiftAppId"])! as! String
-
-    let config = (map["configMap"])! as! [String: Any]
-
-    Helpshift.install(withPlatformId: appId, domain: domainName, config: config)
-
-    //        HelpshiftCore.initialize(with: HelpshiftSupport.sharedInstance())
-    //        HelpshiftCore.install(forApiKey:apiKey, domainName: domainName, appID: appId)
-
-  }
+//   func configureHelpShiftSdk(_ map: [String: Any]) {
+// //    let apiKey = (map["helpShiftApiKey"])! as! String
+//     let domainName = (map["helpShiftDomain"])! as! String
+//     let appId = (map["helpShiftAppId"])! as! String
+//
+//     let config = (map["configMap"])! as! [String: Any]
+//
+//     Helpshift.install(withPlatformId: appId, domain: domainName, config: config)
+//
+//     //        HelpshiftCore.initialize(with: HelpshiftSupport.sharedInstance())
+//     //        HelpshiftCore.install(forApiKey:apiKey, domainName: domainName, appID: appId)
+//
+//   }
 
   func showAllConversation(_ type: UIViewController, _ configMap: [String: Any]) {
 
@@ -129,5 +161,23 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
 
   func setLanguage(_ language: String) {
     Helpshift.setLanguage(language)
+  }
+    
+  func handleProactiveLink(_ proactiveLink: String) {
+    Helpshift.handleProactiveLink(proactiveLink)
+  }
+
+  func handlePush(_ data: [String: String]) {
+      let viewController: UIViewController =
+        (UIApplication.shared.delegate?.window??.rootViewController)!
+    Helpshift.handleNotification(withUserInfoDictionary: data, isAppLaunch: true, with: viewController)
+  }
+
+  func clearAnonymousUserOnLogin(_ clearAnonymousUser: Bool) {
+    Helpshift.clearAnonymousUser(onLogin: clearAnonymousUser)
+  }
+
+  func requestUnreadMessageCount(_ shouldFetchFromServer: Bool) {
+    Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
   }
 }

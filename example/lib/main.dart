@@ -4,24 +4,25 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper.dart';
 import 'package:helpshift_wrapper_example/src/constants.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  setupHelpShiftSdk();
+  // setupHelpShiftSdk();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
   });
 }
 
-/// configure HelpShift SDK for Native Platforms
-void setupHelpShiftSdk() async {
-  await HelpshiftWrapper.setUpHelpShiftSDK(
-    helpShiftApiKey: Constants.helpShiftApiKey(),
-    helpShiftAppId: Constants.helpShiftAppId(),
-    helpShiftDomain: Constants.helpShiftDomain,
-  );
-}
+// /// configure HelpShift SDK for Native Platforms
+// void setupHelpShiftSdk() async {
+//   await HelpshiftWrapper.setUpHelpShiftSDK(
+//     helpShiftApiKey: Constants.helpShiftApiKey(),
+//     helpShiftAppId: Constants.helpShiftAppId(),
+//     helpShiftDomain: Constants.helpShiftDomain,
+//   );
+// }
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -83,13 +84,6 @@ class _MyAppState extends State<MyApp> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  HelpshiftWrapper.showAllConversation(
-                      configMap: setMetadata());
-                },
-                child: const Text('Show All Conversation'),
-              ),
-              ElevatedButton(
-                onPressed: () {
                   HelpshiftWrapper.openFAQsScreen(configMap: setMetadata());
                 },
                 child: const Text('FAQs'),
@@ -128,6 +122,10 @@ class _MyAppState extends State<MyApp> {
                       publishId: "8", configMap: getConfigmap());
                 },
                 child: const Text('What Payment Methods do you accept?'),
+              ),
+              ElevatedButton(
+                onPressed: () => Permission.notification.request(),
+                child: const Text('Request notification permission'),
               ),
               const SizedBox(height: 20),
               languageWidget(context),
@@ -170,9 +168,9 @@ class _MyAppState extends State<MyApp> {
                   dynamic result;
                   if (validationUserDetail(context)) {
                     result = await HelpshiftWrapper.loginUser(
-                      userId: userId ?? "",
-                      email: userEmail ?? "",
-                      userName: userName ?? "",
+                      userId: userId,
+                      email: userEmail,
+                      userName: userName,
                     );
                   }
 
@@ -248,7 +246,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () async {
                   var language = languageCtrl.text.trim();
                   final result = await HelpshiftWrapper.setLanguage(
-                    language: language ?? "",
+                    language: language,
                   );
 
                   languageCtrl.clear();
@@ -266,7 +264,10 @@ class _MyAppState extends State<MyApp> {
 
   /// setup your config map according to your need
   getConfigmap() {
-    Map<String, dynamic> config = {};
+    Map<String, dynamic> config = {
+      "initiateChatOnLoad": true,
+      // "initialUserMessage": "foobar",
+    };
     // set tags for tracking
     config["tags"] = ["foo", "bar"];
 
@@ -314,7 +315,9 @@ class _MyAppState extends State<MyApp> {
 
   /// custom metadata
   setMetadata() {
-    Map<String, dynamic> config = {};
+    Map<String, dynamic> config = {
+      "enableLogging": true,
+    };
     var metaMap = {"usertype": "paid"};
     config["customMetadata"] = metaMap;
     return config;

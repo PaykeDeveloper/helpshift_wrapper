@@ -53,20 +53,45 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
     throw UnimplementedError();
   }
 
-  @override
-  Future<String> setUpHelpShiftSDK({
-    required String helpShiftApiKey,
-    required String helpShiftAppId,
-    required String helpShiftDomain,
-    Map<String, dynamic>? configMap,
-  }) {
-    // TODO: implement setUpHelpShiftSDK
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<String> setUpHelpShiftSDK({
+  //   required String helpShiftApiKey,
+  //   required String helpShiftAppId,
+  //   required String helpShiftDomain,
+  //   Map<String, dynamic>? configMap,
+  // }) {
+  //   // TODO: implement setUpHelpShiftSDK
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<void> showAllConversation({Map<String, dynamic>? configMap}) {
     // TODO: implement showAllConversation
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser}) {
+    // TODO: implement clearAnonymousUserOnLogin
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> handleProactiveLink({required String proactiveLink}) {
+    // TODO: implement handleProactiveLink
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> handlePush({required Map<String, String> data}) {
+    // TODO: implement handlePush
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> requestUnreadMessageCount(
+      {required bool shouldFetchFromServer}) {
+    // TODO: implement requestUnreadMessageCount
     throw UnimplementedError();
   }
 }
