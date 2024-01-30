@@ -3,11 +3,15 @@ import UIKit
 import HelpshiftX
 import Foundation
 
-public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
+public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin, HelpshiftDelegate {
+  var channel: FlutterMethodChannel? = nil
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "helpshift_wrapper", binaryMessenger: registrar.messenger())
     let instance = HelpshiftWrapperPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
+    instance.channel = channel
+    Helpshift.sharedInstance().delegate = instance
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -179,5 +183,13 @@ public class HelpshiftWrapperPlugin: NSObject, FlutterPlugin {
 
   func requestUnreadMessageCount(_ shouldFetchFromServer: Bool) {
     Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
+  }
+
+  public func handleHelpshiftEvent(_ eventName: String, withData data: [AnyHashable: Any]?) {
+    channel?.invokeMethod("onEventOccurred", arguments: ["eventName": eventName, "data": data])
+  }
+
+  public func authenticationFailedForUser(with reason: HelpshiftAuthenticationFailureReason) {
+    channel?.invokeMethod("onUserAuthenticationFailure", arguments: ["reason": reason])
   }
 }

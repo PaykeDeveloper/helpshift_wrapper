@@ -140,4 +140,10 @@ class MethodChannelHelpshiftWrapper extends HelpshiftWrapperPlatform {
       {'shouldFetchFromServer': shouldFetchFromServer},
     );
   }
+
+  @override
+  Future<void> setMethodCallHandler({
+    required Future Function(MethodCall call)? handler,
+  }) async =>
+      methodChannel.setMethodCallHandler(handler);
 }

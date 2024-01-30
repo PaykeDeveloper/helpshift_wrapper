@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper.dart';
-import 'package:helpshift_wrapper_example/src/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() {
@@ -37,6 +36,16 @@ class _MyAppState extends State<MyApp> {
   final userEmailCtrl = TextEditingController();
   final languageCtrl = TextEditingController();
   var isLoggedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    HelpshiftWrapper.setMethodCallHandler(
+      handler: (call) async {
+        print('call $call');
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +138,14 @@ class _MyAppState extends State<MyApp> {
               ),
               const SizedBox(height: 20),
               languageWidget(context),
+              ElevatedButton(
+                onPressed: () {
+                  HelpshiftWrapper.requestUnreadMessageCount(
+                    shouldFetchFromServer: true,
+                  );
+                },
+                child: const Text('Request Unread Message Count'),
+              ),
             ],
           ),
         ),
