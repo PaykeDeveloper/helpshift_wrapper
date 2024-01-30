@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import 'helpshift_wrapper_platform_interface.dart';
 
 const Map<String, dynamic> defaultMap = {};
@@ -64,4 +66,15 @@ class HelpshiftWrapper {
 
   static Future<bool> setLanguage({required String language}) async =>
       HelpshiftWrapperPlatform.instance.setLanguage(language: language);
+
+  static Future<bool> requestUnreadMessageCount(
+          {required bool shouldFetchFromServer}) =>
+      HelpshiftWrapperPlatform.instance.requestUnreadMessageCount(
+        shouldFetchFromServer: shouldFetchFromServer,
+      );
+
+  static Future<void> setMethodCallHandler({
+    required Future<dynamic> Function(MethodCall call)? handler,
+  }) =>
+      HelpshiftWrapperPlatform.instance.setMethodCallHandler(handler: handler);
 }

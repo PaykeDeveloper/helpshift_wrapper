@@ -1,3 +1,4 @@
+import 'package:flutter/src/services/message_codec.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper.dart';
 import 'package:helpshift_wrapper/helpshift_wrapper_method_channel.dart';
@@ -60,6 +61,14 @@ class MockHelpshiftWrapperPlatform
   Future<bool> requestUnreadMessageCount(
       {required bool shouldFetchFromServer}) {
     // TODO: implement requestUnreadMessageCount
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setMethodCallHandler({
+    required Future Function(MethodCall call)? handler,
+  }) {
+    // TODO: implement setMethodCallHandler
     throw UnimplementedError();
   }
 }

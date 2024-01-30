@@ -3,6 +3,8 @@ package com.app.helpshift_wrapper
 import android.app.Activity
 import android.app.Application
 import com.helpshift.Helpshift
+import com.helpshift.HelpshiftAuthenticationFailureReason
+import com.helpshift.HelpshiftEventsListener
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -26,6 +28,7 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "helpshift_wrapper")
         channel.setMethodCallHandler(this)
+        setHelpshiftEventsListener()
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -209,6 +212,18 @@ class HelpshiftWrapperPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private fun requestUnreadMessageCount(shouldFetchFromServer: Boolean) {
         Helpshift.requestUnreadMessageCount(shouldFetchFromServer)
+    }
+
+    private fun setHelpshiftEventsListener() {
+        Helpshift.setHelpshiftEventsListener(object : HelpshiftEventsListener {
+            override fun onEventOccurred(eventName: String, data: Map<String, Any>) {
+                channel.invokeMethod("onEventOccurred", mapOf("eventName" to eventName, "data" to data))
+            }
+
+            override fun onUserAuthenticationFailure(reason: HelpshiftAuthenticationFailureReason?) {
+                channel.invokeMethod("onUserAuthenticationFailure", mapOf("reason" to reason.toString()))
+            }
+        })
     }
 
     companion object {

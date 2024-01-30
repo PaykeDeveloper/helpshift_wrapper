@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'helpshift_wrapper_method_channel.dart';
@@ -61,4 +62,8 @@ abstract class HelpshiftWrapperPlatform extends PlatformInterface {
   Future<bool> clearAnonymousUserOnLogin({required bool clearAnonymousUser});
 
   Future<bool> requestUnreadMessageCount({required bool shouldFetchFromServer});
+
+  Future<void> setMethodCallHandler({
+    required Future<dynamic> Function(MethodCall call)? handler,
+  });
 }

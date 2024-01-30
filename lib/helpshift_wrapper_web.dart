@@ -2,6 +2,7 @@
 // of your plugin as a separate package, instead of inlining it in the same
 // package as the core of your plugin.
 // ignore: avoid_web_libraries_in_flutter
+import 'package:flutter/src/services/message_codec.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'helpshift_wrapper_platform_interface.dart';
@@ -92,6 +93,14 @@ class HelpshiftWrapperWeb extends HelpshiftWrapperPlatform {
   Future<bool> requestUnreadMessageCount(
       {required bool shouldFetchFromServer}) {
     // TODO: implement requestUnreadMessageCount
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> setMethodCallHandler({
+    required Future Function(MethodCall call)? handler,
+  }) {
+    // TODO: implement setMethodCallHandler
     throw UnimplementedError();
   }
 }
